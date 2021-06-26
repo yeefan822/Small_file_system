@@ -5,8 +5,13 @@ The disk is divided into sixteen blocks. I use the first block to store the info
 I use two var st_location1 and st_location2 to store the information of the location of file data. If the file data for one file is too big for one block to store then we search for another free block to store the rest data. If the file is not big then leave st_location2 equals zero means that no additional block is needed. Both st_location1 and st_location2 are stored with the other file attributes so that the file attributes and file data are connected. Both st_location1 and st_location2 are initially set to be zero when calling the create function as no file data yet. After calling the write function the two attributes will then be updated. For example, I want to find the file data with the file attributes stored in block 5. So I access into block 5 by getattr() and go to slice [21:22] to get the value of st_location1 and st_location2. In this case we assume st_location1 is 10 and st_location2 is 0. This means that the file data is stored in the tenth block so we can then read the tenth block to get the file data.
 
 To run the file system:
+
 Call the disktool.py first
+
 Then call the format.py to format the space
+
 Create a mount directory by running: "python small.py mount" (if using python 2 or python 3 then just use the corresponding command).
+
 A tiny file system will be created and now you can try some commands there(e.g. touch, echo, cat, ls, rm)
+
 You can check the output of your operations by running: "od --address-radix=x -t x1 -a my-disk "
